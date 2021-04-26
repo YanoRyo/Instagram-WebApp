@@ -12,7 +12,19 @@
   </head>
 
   <body>
-    <%= render 'partial/navbar'%>
+    <%= render 'partial/navbar' if current_user%>
+    <%# ==========Deviseのフラッシュメッセージを追加========== %>
+    <% if flash[:notice]%>
+      <div class="alert alert-info">
+        <%= flash[:notice]%>
+      </div>
+    <% end %>
+    <% if flash[:alert]%>
+      <div class="alert alert-danger">
+        <%= flash[:alert]%>
+      </div>
+    <% end %>
+    <%# ==========Deviseのフラッシュメッセージを追加========== %>
     <%= yield %>
   </body>
 </html>
