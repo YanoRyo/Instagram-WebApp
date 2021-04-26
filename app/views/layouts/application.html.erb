@@ -12,6 +12,7 @@
   </head>
 
   <body>
+  <div id="wrapper">
     <%= render 'partial/navbar' if current_user%>
     <%# ==========Deviseのフラッシュメッセージを追加========== %>
     <% if flash[:notice]%>
@@ -26,5 +27,7 @@
     <% end %>
     <%# ==========Deviseのフラッシュメッセージを追加========== %>
     <%= yield %>
+    <%= render 'partial/footer' %>
+  </div>
   </body>
 </html>
