@@ -57,3 +57,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #サインアップ、サインインの機能を追加
 gem 'devise'
+#画像を投稿する機能の追加
+gem 'carrierwave', '~> 2.0'
+#ImageMagickとは、画像処理ライブラリ追加
+gem "mini_magick"
