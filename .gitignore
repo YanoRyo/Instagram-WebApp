@@ -38,3 +38,5 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+#アップロードした画像はコミットしないように
+public/uploads/
