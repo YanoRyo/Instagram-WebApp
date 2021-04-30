@@ -10,16 +10,44 @@
             title: post.user.name do %>
             <strong><%= post.user.name %></strong>
           <% end %>
+          <%# ==========投稿一覧画面の各投稿に削除リンクを追加========== %>
+          <% if post.user_id == current_user.id%>
+            <%= link_to post_path(post),method: :delete, class:"ml-auto mx-0 my-auto" do %>
+              <div class="delete-post-icon">
+              </div>
+            <% end %>
+          <% end %>
+        <%# ==========投稿一覧画面の各投稿に削除リンクを追加========== %>
         </div>
 
-        <%= image_tag post.photos.first.image.url(:medium), class: "card-img-top" %>
+
+        <%# ==========投稿詳細ページに遷移するリンク(画像や要素をリンクにしたい場合、link_toでブロック構文を利用)========== %>
+        <%= link_to(post_path(post)) do%>
+          <%= image_tag post.photos.first.image.url(:medium), class: "card-img-top"%>
+        <% end %>
+        <%# ==========投稿詳細ページに遷移するリンク(画像や要素をリンクにしたい場合、link_toでブロック構文を利用)========== %>
 
         <div class="card-body">
           <div class="row parts">
-            <%= link_to "", "#", class: "love" %>
+          <%# ==========いいねの実装========== %>
+          <div id="like-icon-post-<%= post.id.to_s%>">
+            <% if post.liked_by(current_user).present? %>
+              <%= link_to "いいねを取り消す",post_like_path(post.id,post.liked_by(current_user)),method: :DELETE, remote: true,class:"loved hide-text" %>
+            <% else %>
+              <%= link_to "いいね",post_likes_path(post), method: :POST, remote: true,class:"loved hide-text"%>
+            <% end %>
+          </div>
+          <%# ==========いいねの実装========== %>
+
             <%= link_to "", "#", class: "comment" %>
           </div>
-          <div><strong>「いいね！」10件</strong></div>
+
+          <%# ==========いいねの実装========== %>
+          <div id="like-text-post-<%= post.id.to_s %>">
+            <%= render "like_text", { likes: post.likes } %>
+          </div>
+          <%# ==========いいねの実装========== %>
+
           <div>
             <span><strong><%= post.user.name %></strong></span>
             <span><%= post.caption %></span>

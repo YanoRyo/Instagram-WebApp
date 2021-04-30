@@ -7,9 +7,12 @@ Rails.application.routes.draw do
   get 'users/:id', to:'users#show',as:'user'
 
   #ポスト機能のルート
-  resources :posts, only: %i(new create index) do
+  resources :posts, only: %i(index new create show destroy) do
     resources :phots, only: %i(create)
+
+  #ライク機能のルート
+  resources :likes, only: %i(create destroy)
+
   end
-  #ポスト機能のルート
 
 end

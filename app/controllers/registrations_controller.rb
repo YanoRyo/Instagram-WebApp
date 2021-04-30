@@ -13,4 +13,5 @@ class RegistrationsController < Devise::RegistrationsController
   end
   # ==========プロフィール編集後はログインしているユーザーのプロフィールページにリダイレクト==========
 
+
 end
