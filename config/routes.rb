@@ -9,9 +9,10 @@ Rails.application.routes.draw do
   #ポスト機能のルート
   resources :posts, only: %i(index new create show destroy) do
     resources :phots, only: %i(create)
-
-  #ライク機能のルート
-  resources :likes, only: %i(create destroy)
+    #ライク機能のルート
+    resources :likes, only: %i(create destroy)
+    #コメント機能のルート
+    resources :comments, only: %i(create destroy)
 
   end
 

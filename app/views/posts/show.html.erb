@@ -16,15 +16,15 @@
               title: @post.user.name do %>
               <strong><%= @post.user.name %></strong>
             <% end %>
-          </div>
-          <%# ==========投稿一覧画面の各投稿に削除リンクを追加========== %>
-          <% if @post.user_id == current_user.id%>
-            <%= link_to post_path(@post),method: :delete, class:"ml-auto mx-0 my-auto" do %>
-              <div class="delete-post-icon">
-              </div>
+            <%# ==========投稿一覧画面の各投稿に削除リンクを追加========== %>
+            <% if @post.user_id == current_user.id%>
+              <%= link_to post_path(@post),method: :delete, class:"ml-auto mx-0 my-auto" do %>
+                <div class="delete-post-icon">
+                </div>
+              <% end %>
             <% end %>
-          <% end %>
-          <%# ==========投稿一覧画面の各投稿に削除リンクを追加========== %>
+            <%# ==========投稿一覧画面の各投稿に削除リンクを追加========== %>
+          </div>
           <div class="m-2">
             <strong>
               <%= @post.caption %>
@@ -32,6 +32,12 @@
           </div>
           <div class="comment-post-id">
             <div class="m-2">
+
+              <%# ==========コメント欄表示========== %>
+              <div id="comment-post-<%= @post.id.to_s %>">
+                <%= render 'comment_list', post: @post %>
+              </div>
+              <%# ==========コメント欄表示========== %>
             </div>
           </div>
         </div>
@@ -54,6 +60,16 @@
         <%# ==========ここまで追加する========== %>
         <div class="post-time"><%= time_ago_in_words(@post.created_at).upcase %>前</div>
         <hr>
+
+        <%# ==========コメント欄の作成========== %>
+        <div class="row parts" id="comment-form-post-<%= @post.id.to_s %>">
+          <%= form_with model: [@post, Comment.new], local:false,  class: "w-100" do |f| %>
+            <%= f.hidden_field :user_id, value: current_user.id %>
+            <%= f.hidden_field :post_id, value: @post.id %>
+            <%= f.text_field :comment, class: "form-control comment-input border-0", placeholder: "コメント ...", autocomplete: :off %>
+          <% end %>
+        </div>
+        <%# ==========コメント欄の作成========== %>
       </div>
     </div>
   </div>
