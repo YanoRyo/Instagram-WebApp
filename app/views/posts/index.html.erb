@@ -4,7 +4,11 @@
       <div class="card">
         <div class="card-header align-items-center d-flex">
           <%= link_to user_path(post.user), class: "no-text-decoration" do %>
-            <%= image_tag avatar_url(post.user), class: "post-profile-icon" %>
+            <% if post.user.profile_photo.present?%>
+            <%= image_tag post.user.profile_photo.url, class: "post-profile-icon"  %>
+            <% else %>
+            <%= image_tag 'default.jpg', class: "post-profile-icon"  %>
+            <% end %>          
           <% end %>
           <%= link_to user_path(post.user), class: "black-color no-text-decoration",
             title: post.user.name do %>

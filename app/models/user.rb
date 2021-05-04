@@ -11,6 +11,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
         
   validates :name,presence: true,length: { maximum: 50}
+  validates :profile_photo, presence: true
+  #Userモデルのprofile_photoカラムと、先ほど作成したアップローダーImageUploaderと紐付け
+  mount_uploader :profile_photo, ImageUploader
  # ==========パスワードを入力しなくてもプロフィールの情報を編集できるよう==========
   def update_without_current_password(params, *options)
 
